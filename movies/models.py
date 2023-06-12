@@ -23,5 +23,7 @@ class Movie(models.Model):
     )
     synopsis = models.TextField(blank=True, null=True, default=None)
     user = models.ForeignKey(
-        "users.User", on_delete=models.PROTECT, related_name="users"
+        "users.User",
+        on_delete=models.CASCADE,
+        related_name="users",
     )

@@ -3,7 +3,7 @@ from .models import User
 from rest_framework.validators import UniqueValidator
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     username = serializers.CharField(
         validators=[
@@ -25,20 +25,6 @@ class UserSerializer(serializers.ModelSerializer):
     birthdate = serializers.DateField(required=False)
     is_employee = serializers.BooleanField(required=False)
     is_superuser = serializers.BooleanField(read_only=True)
-
-    class Meta:
-        model = User
-        fields = (
-            "id",
-            "username",
-            "email",
-            "password",
-            "first_name",
-            "last_name",
-            "birthdate",
-            "is_employee",
-            "is_superuser",
-        )
 
     def create(self, validated_data: dict):
         if validated_data.get("is_employee"):
